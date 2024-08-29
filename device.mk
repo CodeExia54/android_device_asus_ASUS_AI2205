@@ -76,13 +76,6 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
     android.hardware.health@2.1-service
 
-# Overrides
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=$(PRODUCT_RELEASE_NAME) \
-    TARGET_DEVICE=$(PRODUCT_RELEASE_NAME)
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.device=$(PRODUCT_RELEASE_NAME)
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
