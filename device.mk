@@ -60,8 +60,8 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl-qti \
     android.hardware.boot@1.1-impl-qti.recovery \
     android.hardware.boot@1.1-service \
-    bootctrl.taro \
-    bootctrl.taro.recovery
+    bootctrl.AI2205 \
+    bootctrl.AI2205.recovery
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
