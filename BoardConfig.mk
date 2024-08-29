@@ -13,16 +13,13 @@ ALLOW_MISSING_DEPENDENCIES := true
 # A/B
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
-    system \
-    system_ext \
-    product \
-    vendor \
-    vendor_dlkm \
     odm \
-    boot \
-    dtbo \
-    recovery
-BOARD_USES_RECOVERY_AS_BOOT = true
+    system \
+    product \
+    system_ext \
+    vendor
+
+# BOARD_USES_RECOVERY_AS_BOOT := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -42,24 +39,16 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a75
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
-# Build Broken
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := kalama
 TARGET_NO_BOOTLOADER := true
-TARGET_USES_UEFI := true
-TARGET_NO_KERNEL := false
-BOARD_RAMDISK_USE_LZ4 := true
 
 # Kernel
 BOARD_BOOTIMG_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_KERNEL_IMAGE_NAME := kernel
 BOARD_KERNEL_CMDLINE := video=vfb:640x400,bpp=32,memsize=3072000 printk.devkmsg=on firmware_class.path=/vendor/firmware_mnt/image bootconfig androidboot.hardware=qcom androidboot.memcg=1 androidboot.usbcontroller=a600000.dwc3 loop.max_part=7 androidboot.selinux=permissive buildvariant=eng
-# TARGET_KERNEL_CONFIG := ASUS_AI2205_defconfig
+# TARGE_KERNEL_CONFIG := ASUS_AI2205_defconfig
 # TARGET_KERNEL_SOURCE := kernel/asus/ASUS_AI2205
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE         := 4096
@@ -80,34 +69,18 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
-BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
-BOARD_RAMDISK_USE_LZ4 := true
-
-BOARD_SUPER_PARTITION_SIZE := 9126805504
-BOARD_SUPER_PARTITION_GROUPS := main
-BOARD_MAIN_SIZE := 9126805504
-BOARD_MAIN_PARTITION_LIST := system system_ext product vendor odm
-
-BOARD_USES_METADATA_PARTITION := true
-
-BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
-
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-
-TARGET_COPY_OUT_ODM := odm
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
+BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
+BOARD_SUPER_PARTITION_GROUPS := asus_dynamic_partitions
+BOARD_ASUS_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor odm
+BOARD_ASUS_DYNAMIC_PARTITIONS_SIZE := 9122611200 # TODO: Fix hardcoded value
 
 # Platform
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_BOARD_PLATFORM := $(TARGET_BOOTLOADER_BOARD_NAME)
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno665
-QCOM_BOARD_PLATFORMS += $(TARGET_BOARD_PLATFORM)
+TARGET_BOARD_PLATFORM := kalama
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
@@ -152,17 +125,14 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
 BOARD_USES_METADATA_PARTITION := true
 TW_USE_FSCRYPT_POLICY := 2
-PLATFORM_VERSION := 13
+# PLATFORM_VERSION := 13
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-#TW_USE_FSCRYPT_POLICY := 1
-
-# Qcom Decryption
-#BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # Tool
 TW_INCLUDE_REPACKTOOLS := true
@@ -180,7 +150,6 @@ TW_INCLUDE_FASTBOOTD := true
 
 # Other TWRP Configurations
 TW_THEME := portrait_hdpi
-TW_DEVICE_VERSION := Nino
 TW_FRAMERATE := 60
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
@@ -195,18 +164,12 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := zh_CN
 TW_DEFAULT_BRIGHTNESS := 200
 TW_EXCLUDE_APEX := true
 TW_HAS_EDL_MODE := true
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.date.utc;ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
-RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libcap.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
-
-# Load kernel modules for touch & vibrator
-TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko focaltech_fts.ko hdcp_qseecom_dlkm.ko panel_event_notifier.ko q6_notifier_dlkm.ko qcom-hv-haptics.ko"
+TW_DEVICE_VERSION := Build By Nino
+TW_HAS_MTP := true
 
 # Haptic
 TW_NO_HAPTICS := true
