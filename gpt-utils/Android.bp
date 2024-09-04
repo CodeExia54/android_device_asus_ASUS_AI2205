@@ -16,7 +16,7 @@
 
 
 cc_library {
-    name: "libgptutils.WW_AI2205",
+    name: "libgptutils.asus_AI2205",
     vendor: true,
     recovery_available: true,
     shared_libs: [
@@ -27,7 +27,6 @@ cc_library {
     cflags: [
         "-Wall",
         "-Werror",
-        "-Wno-unused-parameter",
     ],
     srcs: [
         "gpt-utils.cpp",
@@ -35,7 +34,7 @@ cc_library {
     ],
     owner: "qti",
     header_libs: [
-        "device_kernel_headers",
+        "generated_kernel_headers",
     ],
     export_include_dirs: ["."],
 }
