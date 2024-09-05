@@ -5,7 +5,6 @@ ro.product.vendor.brand=asus
 ro.product.vendor.device=ASUS_AI2205
 ro.product.vendor.manufacturer=asus
 ro.product.vendor.model=ASUS_AI2205
-ro.product.vendor.name=WW_AI2205
 ro.boot.dynamic_partitions=true
 vendor.usb.use_ffs_mtp=1
 ro.board.platform=kalama
