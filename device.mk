@@ -57,6 +57,13 @@ PRODUCT_PACKAGES += \
     f2fs_io \
     check_f2fs
 
+# Fuse Passthrough
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.fuse.passthrough.enable=true
+
+# OEM OTACerts
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    $(LOCAL_PATH)/security/otacert
+
 # QCOM Decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
@@ -90,6 +97,15 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 RECOVERY_BINARY_SOURCE_FILES += \
     $(TARGET_OUT_EXECUTABLES)/debuggerd \
     $(TARGET_OUT_EXECUTABLES)/strace
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
+
+# Soong namespaces, Config
+SOONG_CONFIG_NAMESPACES += ufsbsg
+SOONG_CONFIG_ufsbsg += ufsframework
+SOONG_CONFIG_ufsbsg_ufsframework := bsg
 
 # Userdata Checkpoint
 PRODUCT_PACKAGES += \
