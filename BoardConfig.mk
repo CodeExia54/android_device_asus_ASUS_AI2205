@@ -47,6 +47,10 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 TARGET_USES_REMOTEPROC := true
 
+# Build Rules
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # FBE Decryption, QCOM
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 
@@ -60,6 +64,9 @@ TARGET_NO_KERNEL_OVERRIDE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_USES_VENDOR_DLKMIMAGE := true
 BOARD_USES_METADATA_PARTITION := true
+
+# Partition, Information
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # Partitions, Sizes
 BOARD_FLASH_BLOCK_SIZE := 262144
@@ -96,6 +103,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_USES_MKE2FS := true
 
 # Recovery, Extras
 BOARD_ROOT_EXTRA_FOLDERS += \
@@ -135,9 +143,11 @@ TW_EXCLUDE_APEX := true
 TW_STATUS_ICONS_ALIGN := center
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_DEFAULT_BRIGHTNESS := 200
+TW_MAX_BRIGHTNESS := 1051
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
 TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko twrp.ko"
+TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_NO_FLASH_CURRENT_TWRP := true
 
 # TWRP Debugging
