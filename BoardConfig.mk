@@ -155,7 +155,7 @@ TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 
 # TWRP Device Version
-TW_DEVICE_VERSION := Nino-Crypton
+# TW_DEVICE_VERSION := Exia
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
