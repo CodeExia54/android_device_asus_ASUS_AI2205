@@ -1,4 +1,4 @@
 # making... 
 _ASUS_AI2205_
 
-absolutely trash
+Working TWRP for ASUS AI2205
