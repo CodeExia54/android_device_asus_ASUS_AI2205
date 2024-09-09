@@ -141,6 +141,7 @@ TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TW_QCOM_ATS_OFFSET := 1666528204500
 TW_EXCLUDE_APEX := true
 TW_STATUS_ICONS_ALIGN := center
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone39/temp"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_DEFAULT_BRIGHTNESS := 200
 TW_MAX_BRIGHTNESS := 1051
@@ -149,6 +150,7 @@ TW_OVERRIDE_SYSTEM_PROPS := \
 TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko twrp.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_NO_FLASH_CURRENT_TWRP := true
+TW_USE_LEGACY_BATTERY_SERVICES := true
 
 # TWRP Debugging
 TARGET_USES_LOGD := true
