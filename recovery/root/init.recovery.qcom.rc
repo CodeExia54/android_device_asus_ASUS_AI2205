@@ -61,8 +61,8 @@ on property:twrp.modules.loaded=true && property:dev.mnt.blk.firmware=*
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
-    wait /sys/class/asuslib/POGO_OTG_EN
-    write /sys/class/asuslib/POGO_OTG_EN 1
+    wait /sys/class/asuslib/BTM_OTG_EN
+    write /sys/class/asuslib/BTM_OTG_EN 1
     start health-hal-2-1
 
 on property:ro.twrp.fastbootd=1
