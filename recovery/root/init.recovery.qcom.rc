@@ -33,11 +33,6 @@ on early-init
 on init
     write /sys/class/backlight/panel0-backlight/brightness 200
 
-on property:sys.usb.typec.state=*
-    wait /sys/class/dual_role_usb/otg_default/data_role
-    write /sys/class/dual_role_usb/otg_default/data_role ${sys.usb.typec.data_role}
-    setprop sys.usb.typec.state ${sys.usb.typec.data_role}
-
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -66,6 +61,8 @@ on property:twrp.modules.loaded=true && property:dev.mnt.blk.firmware=*
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
+    wait /sys/class/asuslib/POGO_OTG_EN
+    write /sys/class/asuslib/POGO_OTG_EN 1
     start health-hal-2-1
 
 on property:ro.twrp.fastbootd=1
